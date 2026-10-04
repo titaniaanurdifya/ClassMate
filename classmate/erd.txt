@@ -1,0 +1,51 @@
+title Student Academic Management System
+
+Mahasiswa [icon: user, color: blue] {
+  id_mahasiswa int pk
+  nama varchar
+  nim varchar
+  email varchar
+  password varchar
+}
+
+Jadwal [icon: calendar, color: green] {
+  id_jadwal int pk
+  id_mahasiswa int fk
+  mata_kuliah varchar
+  hari varchar
+  jam_mulai time
+  jam_selesai time
+  ruangan varchar
+  dosen_pengajar varchar
+}
+
+Tugas [icon: file-text, color: orange] {
+  id_tugas int pk
+  id_mahasiswa int fk
+  id_jadwal int fk
+  nama_tugas varchar
+  deskripsi text
+  deadline datetime
+  status varchar
+}
+
+Dosen [icon: briefcase, color: purple] {
+  id_dosen int pk
+  nama_dosen varchar
+  email varchar
+  no_hp varchar
+  mata_kuliah varchar
+}
+
+Reminder [icon: bell, color: yellow] {
+  id_reminder int pk
+  id_tugas int fk
+  pesan varchar
+  waktu_reminder datetime
+  status_reminder varchar
+}
+
+Mahasiswa.id_mahasiswa < Jadwal.id_mahasiswa
+Mahasiswa.id_mahasiswa < Tugas.id_mahasiswa
+Jadwal.id_jadwal < Tugas.id_jadwal
+Tugas.id_tugas < Reminder.id_tugas
